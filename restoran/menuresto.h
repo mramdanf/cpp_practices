@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include <cstring>
 
@@ -9,7 +11,14 @@ struct menemukan{
 	int stok;
 };
 
+struct keranjang{
+	menemukan menu;
+	int qty;
+};
+
 menemukan daftarmenu[5];
+keranjang keranjangKu[100];
+int pesananKe = 0;
 
 void inisialisasimenu(){
 	strcpy(daftarmenu[0].nama,"mie ayam");
@@ -34,26 +43,49 @@ void inisialisasimenu(){
 
 void Daftarmenu(){
 	system("cls");
+	cout << "No.\t" << "Nama\t\t" << "Harga" << endl;
 	for(int i=0; i < 5; i++){
-		cout << i+1 << " " << daftarmenu[i].nama << "\n";
+		cout << i+1 << ". \t" << daftarmenu[i].nama << "\t" << daftarmenu[i].harga << "\n";
 	}
 }
 
 void reviewmenu(int nomeja,int nomenu,int harga,int jumlah){
+	menemukan menu = daftarmenu[nomenu-1];
 	cout << "meja no " << nomeja;
-	cout << " memesan " << daftarmenu[nomenu-1].nama;
+	cout << " memesan " << menu.nama;
 	cout << " " << jumlah;
-	cout << " total harga " << daftarmenu[nomenu-1].harga*jumlah;
+	cout << " total harga " << menu.harga*jumlah;
 	cout << "\n";
+
+	// Masukan pesanan ke keranjang
+	keranjangKu[pesananKe].menu = menu;
+	keranjangKu[pesananKe].qty = jumlah;
+	cout << keranjangKu[pesananKe].menu.nama << endl;
+	pesananKe++;
 }
 
 void notapembelian(int nomeja, int nomenu,int harga,int jumlah){
+	double total = 0;
 	cout << "### PESANAN ###\n";
 	cout << "meja :" << nomeja << "\n";
 	cout << "daftar menu yang di pilih\n";
-	cout << "nama\tjumlah\tharga\n";
-	cout << daftarmenu[nomenu-1].nama << "\t" << jumlah << daftarmenu[nomenu-1].harga << "\n";
-	cout << daftarmenu[nomenu-1].harga*jumlah << "\n";
-	cout << "total: \n";
+
+	cout << "no.\tnama\t\tjumlah\tharga\tsub total\n";
+	for (int i = 0; i < pesananKe; i++) {
+		keranjang k = keranjangKu[i];
+		cout << i+1
+		     << ".\t"
+				 << k.menu.nama 
+			   << "\t" 
+				 << k.qty 
+				 << "\t" 
+				 << k.menu.harga 
+				 << "\t"
+				 << k.menu.harga*k.qty
+				 << "\n";
+		total += (k.menu.harga*k.qty);
+	}
+	
+	cout << "total: " << total << endl;
 	cout << "teriama kasih telah berbelanja\n";
 }

@@ -16,23 +16,22 @@ int main(){
 	
 	inisialisasimenu();
 	do{
+		system("cls");
 		Daftarmenu();
 		cout << "silahkan pilih no menu :" ;
 		cin >> nomenu;
 		cout << "jumlah : ";
 		cin >> jumlah;
-		
-		system("cls");
 		reviewmenu(
-		nomeja,
-		nomenu,
-		harga,
-		jumlah
-	);
-	cout << " pilih menu lagi [y/t]: ";
-	cin >> pilihan;
+			nomeja,
+			nomenu,
+			harga,
+			jumlah
+		);
+		cout << "pilih menu lagi [y/t]: ";
+		cin >> pilihan;
 	}while (pilihan == 'y');
 	system("cls");
-	 notapembelian(nomeja,nomenu,harga,jumlah);
+	notapembelian(nomeja,nomenu,harga,jumlah);
 	return 0;
 }
